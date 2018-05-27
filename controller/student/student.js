@@ -1,4 +1,5 @@
 import db from '../../config/db'
+import moment from "moment";
 
 class StudentHandler {
   constructor() {
@@ -7,15 +8,15 @@ class StudentHandler {
 
   save(req, res, next) {
     let student = req.body;
-    console.log(student)
     try {
-      let sql = 'insert into student (name, age, birth) values ("' + student.name + '","' + student.age + '","' + student.birth + '")';
+      let sql = 'insert into student (name, age, birth, idcard) values ("' + student.name + '","' + student.age + '","' + moment(student.birth).format('YYYY-MM-DD HH:mm:ss') + '","' + + student.idCard + '")';
       console.log(sql);
       db.query(sql,function(err, rows) {
         if(err) {
-          res.send('新增失败');
+          res.send('新增失败' + err);
         }
         else {
+          console.log('插入成功')
           res.send(rows);
         }
       })
