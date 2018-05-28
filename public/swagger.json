@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "[接口地址](http://localhost:3000/api/index.html)",
+    "version": "1.0.0",
+    "title": "新框架的api"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "student",
+      "description": "student operation"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/student/save": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "summary": "Create student",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createStudent",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created student",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Student": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        },
+        "idCard": {
+          "type": "string"
+        },
+        "birth": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "xml": {
+        "name": "Student"
+      }
+    }
+  }
+}
