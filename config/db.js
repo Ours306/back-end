@@ -7,13 +7,25 @@ const pool = mysql.createPool({
     database: 'node'
 })
 
-function query(sql, callback) {
-    pool.getConnection(function(err, connection) {
-        connection.query(sql, function(err, rows) {
-            callback(err, rows);
-            connection.release();
+function query(sql, values) {
+    return new Promise((resolve, reject) => {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                reject(err);
+            }
+            else {
+                connection.query(sql, values, (err, rows) => {
+                    if(err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(rows);
+                    }
+                    connection.release();
+                })
+            }
         })
     })
 }
 
-exports.query = query;
+module.exports = query

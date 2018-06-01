@@ -5,9 +5,29 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import router from './routes/index'
 import chalk from 'chalk'
+import swaggerJSDoc from 'swagger-jsdoc'
+
 const config = require('config-lite')(__dirname)
 
 const app = express()
+
+var swaggerDefinition = {
+  info: {
+    title: '新框架API',
+    version: '1.0.1',
+    description: "[接口地址](http://localhost:3000/api-doc/index.html)",
+  },
+  host: 'localhost:3000',
+  basePath: '/'
+}
+
+var options = {
+  swaggerDefinition: swaggerDefinition,
+  apis: ['./routes/*.js']
+}
+
+var swaggerSpec = swaggerJSDoc(options);
+
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
   res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
@@ -27,7 +47,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+})
 app.use('/api-doc', express.static('public'))
+
 router(app)
 
 // catch 404 and forward to error handler
