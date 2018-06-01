@@ -43,4 +43,27 @@ const router = express.Router()
   */
 router.post('/save', StudentHandler.save)
 
+ /**
+  * @swagger
+  * /student/findById:
+  *   get:
+  *     tage:
+  *       - Student
+  *     description: 通过id查找学生
+  *     produces:
+  *       - application/json
+  *     parameters:
+  *       - name: id
+  *         in: query
+  *         description: 学生id
+  *         required: true
+  *         type: integer
+  *     responses:
+  *       200:
+  *         description: 查找成功
+  *         schema:
+  *           $ref: '#/definitions/Student'
+  */
+router.get('/findById', StudentHandler.findById)
+
 export default router
