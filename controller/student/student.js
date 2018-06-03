@@ -1,6 +1,5 @@
-import query from '../../config/db'
 import moment from "moment";
-import { StringDecoder } from 'string_decoder';
+import Student from '../../model/student'
 
 class StudentHandler {
   constructor() {
@@ -8,27 +7,31 @@ class StudentHandler {
   }
 
   async save(req, res, next) {
-    let student = req.body;
+    let student = Student.build({
+      ...req.body
+    });
     try {
-      let sql = `insert into student set name = ?, age = ?, birth = ?, idcard = ? `;
-      let data = await query(sql, [student.name, student.age, student.birth, student.idcard])
+      student = await student.save();
 
-      res.send({ msg: data})
+      res.send({ msg: student})
     } catch (err) {
       console.log(err)
-      res.send({mes: err})
+      res.send({err: err})
     }
   }
 
   async findById(req, res, next) {
     let id = req.query.id;
     try {
-      let sql = `select * from student where id = ?`
-      let data = await query(sql, [id]);
+      let student = await Student.findAll({
+        where: {
+          id: req.query.id
+        }
+      });
 
-      res.send(data);
+      res.send(student);
     } catch (error) {
-      console.log(err);
+      console.log(error);
       res.send({msg: error})
     }
   }
