@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "host": "localhost",
+        "database": "node",
+        "driver": "mysql",
+        "user": "root",
+        "password": "root"
+    }
+}
