@@ -1,3 +1,5 @@
+import Module from '../../model/module'
+
 class ModuleHandler {
   constructor() {
     this.save = this.save.bind(this)
@@ -13,43 +15,31 @@ class ModuleHandler {
     res.send({msg: '接口未实现'})
   }
 
-  findAll(req, res, next) {
-    const data = {
-      name: 'modules',
-      nodes: [{
-        id: 1,
-        name: '信息管理',
-        nodes: [{
-          id: 1.1,
-          name: '学生管理',
-          router: '/student/studentList'
-        }, {
-          id: 1.2,
-          name: '教师管理',
-          router: '/teacher/teacherList'
-        }, {
-          id: 1.3,
-          name: '学校管理',
-          nodes: [{
-            id: '1.3.1',
-            name: '财产管理'
-          }, {
-            id: '1.3.2',
-            name: '教室管理'
-          }]
-        }]
-      },
-      {
-        id: 2,
-        name: '动态表单',
-        nodes: [{
-          id: 2.1,
-          name: '表单管理',
-          router: '/formDesign/Addform'
-        }]
-      }]
+  async findAll(req, res, next) {
+    try {
+      let queue = [];
+      let modules = await Module.findAll({
+        attributes: ["name", "parentId", "id", "router", "hasChild"],
+        order: ['parentId']
+      });
+      let root = modules[0];//根模块
+      queue.push(root);
+      while(queue.length != 0) {
+        let temp = queue.shift();
+        temp.setDataValue('nodes', []);
+        for(let module of modules) {
+          if (module.parentId === temp.id) {
+            temp.dataValues.nodes.push(module);
+            queue.push(module);
+          }
+        }
+      }
+      res.send(root)
+    } catch (err) {
+      console.log(err)
+      res.send({err})
     }
-    res.send(data)
   }
+
 }
 export default new ModuleHandler()
