@@ -53,7 +53,7 @@ router.post('/save', UserController.save)
 
 /**
  * @swagger
- * /user/save:
+ * /user/edit:
  *   post:
  *      tage:
  *          - User

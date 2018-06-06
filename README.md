@@ -7,6 +7,7 @@
 ----------
  1. express        -----------------------------  后端框架
  2. ES6 -----------------------------  语言
+ 3. Sequelize -----------------------------  OR框架
 
 ## **代码提交说明**
 
@@ -18,12 +19,31 @@
 ## 目录结构
 ```shell
 ├── config                       // 配置
+│   ├── database.json            // 数据库连接
+│   ├── default.js               // 配置启动端口
+│   ├── oldDb.js                 // 旧版mysql操作数据库
+│   ├── newDb.js                 // sequelize操作数据库
 ├── controller                   // 控制层
-│   ├── module                   // 模块管理
-│   ├── user                     // 用户管理
+│   ├── admin                    // 开发者模块
+│       ├── module				 // 模块管理
+│       ├── user				 // 用户管理
+│   ├── business                 // 业务逻辑
+│       ├── student			     //	学生管理(例子)
+├── core	                     // 中间件
+├── model                        // 模型层(实体层)
+│   ├── admin                    // 开发者模块
+│       ├── module				 // 模块实体
+│       ├── user				 // 用户实体
+│   ├── business                 // 业务逻辑实体
+│       ├── student			     //	学生实体(例子)
 ├── routes                       // 路由
 │   ├── index.js                 // 配置所有路由对应的路由文件
-│   ├── module.js                // 配置模块的路由(调用controller层进行处理)
+│   ├── admin                    // 开发者模块
+│       ├── module				 // 模块api
+│       ├── user				 // 用户api
+│   ├── business                 // 业务逻辑
+│       ├── student			     //	学生api(例子)
+├── sql                          // sql文件
 ├── app.js                       // 启动文件
 ├── package.json                 // package.json
 ```
