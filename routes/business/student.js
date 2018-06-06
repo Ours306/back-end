@@ -1,5 +1,5 @@
 import express from 'express'
-import StudentHandler from '../controller/student/student'
+import StudentHandler from '../../controller/business/student/student'
 
 const router = express.Router()
 
@@ -12,7 +12,7 @@ const router = express.Router()
  *         type: string
  *       age:
  *         type: integer
- *       idCard:
+ *       idcard:
  *         type: string
  *       birth:
  *         type: string

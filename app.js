@@ -23,7 +23,7 @@ var swaggerDefinition = {
 
 var options = {
   swaggerDefinition: swaggerDefinition,
-  apis: ['./routes/*.js']
+  apis: ['./routes/admin/*.js', './routes/business/*.js']
 }
 
 var swaggerSpec = swaggerJSDoc(options);

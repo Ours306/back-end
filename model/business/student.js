@@ -1,5 +1,5 @@
 import DataTypes from 'sequelize'
-import sequelize from '../config/newDb.js'
+import sequelize from '../../config/newDb.js'
 
 const Student = sequelize.define('student', {
     name: {
