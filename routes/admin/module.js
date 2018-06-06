@@ -1,5 +1,5 @@
 import express from 'express'
-import ModuleHandler from '../controller/module/module'
+import ModuleHandler from '../../controller/admin/module/module'
 
 const router = express.Router()
 

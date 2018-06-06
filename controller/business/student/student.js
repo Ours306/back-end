@@ -1,5 +1,5 @@
 import moment from "moment";
-import Student from '../../model/student'
+import Student from '../../../model/business/student'
 
 class StudentHandler {
   constructor() {

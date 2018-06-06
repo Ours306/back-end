@@ -1,4 +1,4 @@
-import Module from '../../model/module'
+import Module from '../../../model/admin/module'
 
 class ModuleHandler {
   constructor() {
