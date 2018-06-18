@@ -1,7 +1,8 @@
 import DataTypes from 'sequelize'
 import sequelize from '../../config/newDb'
-
-// const Module = sequeli
+/**
+ * 模块实体
+ */
 const Module = sequelize.define('module', {
     name: {
         type: DataTypes.STRING

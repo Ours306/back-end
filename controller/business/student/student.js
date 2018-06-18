@@ -3,7 +3,8 @@ import Student from '../../../model/business/student'
 
 class StudentHandler {
   constructor() {
-    this.save = this.save.bind(this)
+    this.save = this.save.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   async save(req, res, next) {
@@ -13,10 +14,50 @@ class StudentHandler {
     try {
       student = await student.save();
 
-      res.send({ msg: student})
-    } catch (err) {
-      console.log(err)
-      res.send({err: err})
+      res.send(student)
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async delete(req, res, next) {
+    let id = {...req.body}.id;
+    try {
+      let result = await Student.destroy({
+        where: {
+          id: id
+        }
+      })
+      console.log(result);
+      res.send({result});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async edit(req, res, next) {
+    try {
+      let student = await Student.update({
+        ...req.body
+      }, {
+          where: {
+            id: { ...req.body }.id
+          }
+        });
+
+      res.send(student)
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findAll(req, res, next) {
+    try {
+      let students = await Student.findAll();
+
+      res.send(students);
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -31,8 +72,7 @@ class StudentHandler {
 
       res.send(student);
     } catch (error) {
-      console.log(error);
-      res.send({msg: error})
+      next(error);
     }
   }
 }

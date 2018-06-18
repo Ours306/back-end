@@ -1,0 +1,16 @@
+import DataTypes from 'sequelize'
+import sequelize from '../../config/newDb'
+/**
+ * <%= entityName %>实体
+ */
+const <%= entity %> = sequelize.define(<%= tableName %>, {
+    <%_ fileds.forEach((item) => { -%>
+        <%= item.name %>: {
+            type: DataTypes.<%= item.type %>,
+            <%_ if(item.isPrimaryKey) { -%>
+            primaryKey: true
+            <%_ } -%>
+        }
+    <%_ }) -%>
+})
+module.exports = <%= entity %>;

@@ -4,7 +4,6 @@ const env = "dev";
 
 const config = require('./database.json')[env];
 
-
 const sequelize = new Sequelize(
     config.database,
     config.user,
@@ -25,4 +24,5 @@ const sequelize = new Sequelize(
         }
     }    
 )
+sequelize.sync();
 module.exports = sequelize

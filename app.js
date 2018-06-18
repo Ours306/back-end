@@ -6,9 +6,10 @@ import logger from 'morgan'
 import router from './routes/index'
 import chalk from 'chalk'
 import swaggerJSDoc from 'swagger-jsdoc'
+import core from './core/index'
+import session from 'express-session';
 
 const config = require('config-lite')(__dirname)
-
 const app = express()
 
 var swaggerDefinition = {
@@ -38,6 +39,15 @@ app.all('*', function (req, res, next) {
   else next()
 })
 
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000*60*5
+  }
+}))
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -47,7 +57,10 @@ app.use('/swagger.json', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 })
-app.use('/api-doc', express.static('public'))
+app.use('/api-doc', express.static('public/swagger'))
+app.use('/generatecode', express.static('public/generate'))
+
+app.use(core.auth);
 
 router(app)
 
@@ -59,6 +72,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  console.log(err);
+
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 

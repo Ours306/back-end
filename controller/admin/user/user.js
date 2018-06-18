@@ -13,9 +13,9 @@ class UserHandler {
     try {
       user = await user.save();
 
-      res.send({ mes: user })
+      res.send(user)
     } catch (err) {
-      res.send({err})
+      next(err);
     }
   }
 
@@ -29,9 +29,9 @@ class UserHandler {
         }
       });
 
-      res.send({msg: user})
+      res.send(user)
     } catch (err) {
-      res.send({ err})
+      next(err);
     }
   }
 
@@ -39,9 +39,32 @@ class UserHandler {
     try {
       let users = await User.findAll();
 
-      res.send({msg: users});
+      res.send(users);
     } catch (err) {
-      res.send(err)
+      next(err);
+    }
+  }
+
+  async login(req, res, next) {
+    try {
+      let obj = {...req.body};
+
+      let tel = obj.tel;
+      let password = obj.password;
+      let users = await User.findAll({
+        where: {
+          tel
+        }
+      });
+      if(users[0].password === password) {
+        req.session.username = users[0].name;
+        res.send(users)
+      }
+      else {
+        next('用户不存在或密码错误!')
+      }
+    } catch (error) {
+      next(error);
     }
   }
 }

@@ -1,6 +1,8 @@
 import DataTypes from 'sequelize'
 import sequelize from '../../config/newDb.js'
-
+/**
+ * 学生实体
+ */
 const Student = sequelize.define('student', {
     name: {
         type: DataTypes.STRING

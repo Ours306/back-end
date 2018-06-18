@@ -15,6 +15,9 @@ class ModuleHandler {
     res.send({msg: '接口未实现'})
   }
 
+  /**
+   * 采用树的遍历方式得出模块
+   */
   async findAll(req, res, next) {
     try {
       let queue = [];

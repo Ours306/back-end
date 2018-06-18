@@ -1,0 +1,12 @@
+import express from 'express'
+import <%= entity %>Handler from '../../controller/business/<%= entity.toLowerCase() %>/<%= entity.toLowerCase() %>'
+
+const router = express.Router();
+
+router.post('/save', <%= entity %>Handler.save);
+router.post('/delete', <%= entity %>Handler.delete);
+router.post('/edit', <%= entity %>Handler.edit);
+router.get('/findById', <%= entity %>Handler.findById);
+router.get('/findAll', <%= entity %>Handler.findAll);
+
+export default router;
