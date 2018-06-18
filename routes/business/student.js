@@ -42,6 +42,8 @@ const router = express.Router()
   *           $ref: '#/definitions/Student'
   */
 router.post('/save', StudentHandler.save)
+router.post('/delete', StudentHandler.delete)
+router.post('/edit', StudentHandler.edit)
 
  /**
   * @swagger
@@ -65,5 +67,7 @@ router.post('/save', StudentHandler.save)
   *           $ref: '#/definitions/Student'
   */
 router.get('/findById', StudentHandler.findById)
+
+router.get('/findAll', StudentHandler.findAll)
 
 export default router

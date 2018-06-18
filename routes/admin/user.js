@@ -25,6 +25,12 @@ const router = express.Router()
  *       birth:
  *         type: string
  *         format: date-time
+ *   UserLoginForm:
+ *    properties:
+ *      tel:
+ *        type: string
+ *      password:
+ *        type: string
  */
 
 /**
@@ -91,5 +97,29 @@ router.post('/edit', UserController.edit)
   *           $ref: '#/definitions/User'
   */
 router.get('/findAll', UserController.findAll)
+
+/**
+ * @swagger
+ * /user/login:
+ *   post:
+ *      tage:
+ *          - User
+ *      description: 用户登录
+ *      produces:
+ *          - application/json
+ *      parameters:
+ *          - name: user
+ *            description: User Object
+ *            in: body
+ *            required: true
+ *            schema:
+ *              $ref: '#/definitions/UserLoginForm'
+ *      responses:
+ *          200:
+ *              description: 登录成功
+ *              schema:
+ *              $ref: '#/definitions/User'
+ */
+router.post('/login', UserController.login);
 
 export default router
