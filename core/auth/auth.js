@@ -7,5 +7,5 @@ export default function(req, res, next) {
 }
 
 function checkIsLogin(req, res) {
-
+    return true;
 }

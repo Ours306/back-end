@@ -12,4 +12,5 @@ export default app => {
   app.use('/user', user)
   app.use('/module', module)
   app.use('/permission', permission)
+  app.use('/generate', student)
 }

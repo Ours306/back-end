@@ -89,3 +89,33 @@ function add() {
         effects: 'slide'
     })
 }
+
+function sendForm() {
+    let table = $("table tr");
+    let fields = [];
+    let headers = ['name', 'db_name', 'type', 'ch_name', 'isPrimaryKey', 'isAutoIncrease', 'isNull', 'isUnique', 'default']
+    for(let i = 1; i < table.length; i++) {
+        let obj = {};
+
+        $(table[i]).find('td').each(function (index) {
+            var key = headers[index];
+            let value = $(this)[0].children[0].value;
+            
+            if(!!value) {
+                obj[key] = value;
+            }
+        })
+        fields.push(obj);
+    }
+        
+    $.ajax({
+        type: 'POST',
+        url: '/generate',
+        data: 123,
+        success: success
+    })
+}
+
+function success(data, error) {
+    console.log(data+error);
+}

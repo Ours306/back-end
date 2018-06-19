@@ -59,6 +59,10 @@ app.use('/swagger.json', function(req, res) {
 })
 app.use('/api-doc', express.static('public/swagger'))
 app.use('/generatecode', express.static('public/generate'))
+app.use('/generate', function(req, res, next) {
+  console.log('body: '+req.body);
+  res.send({...req.body})
+});
 
 app.use(core.auth);
 
