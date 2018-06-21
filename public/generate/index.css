@@ -29,3 +29,8 @@ td {
 .tip {
     margin-left: 10px;
 }
+
+.toRight {
+    float: right;
+    margin-right: 10px;
+}

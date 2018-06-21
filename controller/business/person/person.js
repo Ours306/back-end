@@ -1,6 +1,6 @@
-import <%= entity %> from '../../../model/business/<%= entity.toLowerCase() %>'
+import Person from '../../../model/business/person'
 
-class <%= entity %>Handler {
+class PersonHandler {
     constructor() {
         this.save = this.save.bind(this);
         this.delete = this.delete.bind(this);
@@ -10,14 +10,14 @@ class <%= entity %>Handler {
     }
 
     async save(req, res, next) {
-        let <%= entity.toLowerCase() %> = <%= entity %>.build({
+        let person = Person.build({
             ...req.body
         })
 
         try {
-            <%= entity.toLowerCase() %> = await <%= entity.toLowerCase() %>.save();
+            person = await person.save();
 
-            res.send(<%= entity.toLowerCase() %>)
+            res.send(person)
         } catch (error) {
             next(error);
         }
@@ -26,7 +26,7 @@ class <%= entity %>Handler {
     async delete(req, res, next) {
         let id = {...req.body}.id;
         try {
-            let result = await <%= entity %>.destroy({
+            let result = await Person.destroy({
                 where: {
                     id: id
                 }
@@ -39,7 +39,7 @@ class <%= entity %>Handler {
 
     async edit(req, res, next) {
         try {
-            let <%= entity.toLowerCase() %> = await <%= entity %>.update({
+            let person = await Person.update({
             ...req.body
             }, {
                 where: {
@@ -47,7 +47,7 @@ class <%= entity %>Handler {
                 }
             });
 
-            res.send(<%= entity.toLowerCase() %>)
+            res.send(person)
         } catch (error) {
             next(error);
         }
@@ -55,9 +55,9 @@ class <%= entity %>Handler {
 
     async findAll(req, res, next) {
         try {
-            let <%= entity.toLowerCase() %> = await <%= entity %>.findAll();
+            let person = await Person.findAll();
 
-            res.send(<%= entity.toLowerCase() %>);
+            res.send(person);
         } catch (error) {
             next(error);
         }
@@ -66,17 +66,17 @@ class <%= entity %>Handler {
     async findById(req, res, next) {
         let id = req.query.id;
         try {
-            let <%= entity.toLowerCase() %> = await <%= entity %>.findAll({
+            let person = await Person.findAll({
                 where: {
                     id: req.query.id
                 }
             });
 
-            res.send(<%= entity.toLowerCase() %>);
+            res.send(person);
         } catch (error) {
             next(error);
         }
     }
 }
 
-export default new <%= entity %>Handler();
+export default new PersonHandler();
