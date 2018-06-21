@@ -1,6 +1,7 @@
 import createError from 'http-errors'
 import express from 'express'
 import path from 'path'
+import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import router from './routes/index'
@@ -52,6 +53,10 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(bodyParser.json({limit: '1mb'}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
 app.use('/swagger.json', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -59,10 +64,6 @@ app.use('/swagger.json', function(req, res) {
 })
 app.use('/api-doc', express.static('public/swagger'))
 app.use('/generatecode', express.static('public/generate'))
-app.use('/generate', function(req, res, next) {
-  console.log('body: '+req.body);
-  res.send({...req.body})
-});
 
 app.use(core.auth);
 

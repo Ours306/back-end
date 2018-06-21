@@ -41,6 +41,16 @@ function add() {
                         <input type="text" class="form-control">
                     </td>
                     <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <select name="isUnique" id="unique`+ count + `" class="form-control">
+                            <option value=""></option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
+                    </td>
+                    <td>
                         <select name="isPrimary" id="primary`+ count + `" class="form-control">
                             <option value=""></option>
                             <option value="false">false</option>
@@ -60,16 +70,6 @@ function add() {
                             <option value="true">true</option>
                             <option value="false">false</option>
                         </select>
-                    </td>
-                    <td>
-                        <select name="isUnique" id="unique`+ count + `" class="form-control">
-                            <option value=""></option>
-                            <option value="false">false</option>
-                            <option value="true">true</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control">
                     </td>
                     <td>
                         <div>
@@ -93,25 +93,57 @@ function add() {
 function sendForm() {
     let table = $("table tr");
     let fields = [];
-    let headers = ['name', 'db_name', 'type', 'ch_name', 'isPrimaryKey', 'isAutoIncrease', 'isNull', 'isUnique', 'default']
+    let headers = ['name', 'db_name', 'type', 'ch_name', 'default', 'isUnique', 'isPrimaryKey', 'isAutoIncrease', 'isNull']
     for(let i = 1; i < table.length; i++) {
         let obj = {};
-
+        
         $(table[i]).find('td').each(function (index) {
-            var key = headers[index];
-            let value = $(this)[0].children[0].value;
-            
-            if(!!value) {
-                obj[key] = value;
+            if(index < 9) {
+                var key = headers[index];
+                let value = $(this)[0].children[0].value;
+                if (index > 5) {//下拉框
+                    if(i===1) {
+                        value = $(this)[0].children[0].children[2].value
+                    }
+                    else {
+                        value = $(this)[0].children[0].value;
+                    }
+                    
+                    if(!!!value || value === "false") {
+                        value = undefined;
+                    }
+                }
+                else {
+                    value = $(this)[0].children[0].value;
+                    if(index === 2) {
+                        value = value.toUpperCase();
+                    }
+                }
+
+                if (!!value) {
+                    obj[key] = value;
+                }
             }
         })
         fields.push(obj);
     }
-        
+    // entity.fields = fields;
+    // let entity = {
+    //     entityName: $("#entityName").val(),
+    //     entity_ch_name: $("#entity_ch_name").val(),
+    //     path: $("#path").val()
+    // }
+    // entity = JSON.stringify(entity);
     $.ajax({
         type: 'POST',
-        url: '/generate',
-        data: 123,
+        url: '/module/generate',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "entityName": $("#entityName").val(),
+            "entity_ch_name": $("#entity_ch_name").val(),
+            "path": $("#path").val(),
+            "fields": fields
+        }),
         success: success
     })
 }

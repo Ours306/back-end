@@ -12,9 +12,9 @@
 </head>
 <body>
     <div class="entityInfo">
-        <div><label>实体名称</label><input type="text" class="form-control"></div>
-        <div><label>中文名称</label><input type="text" class="form-control"></div>
-        <div><label>生成路径</label><input type="text" class="form-control"></div>
+        <div><label>实体名称</label><input type="text" class="form-control" id="entityName"></div>
+        <div><label>中文名称</label><input type="text" class="form-control" id="entity_ch_name"></div>
+        <div><label>生成路径</label><input type="text" class="form-control" id="path"></div>
     </div>
     <div class="filedInfo">
         <table class="filedTable table table-bordered" id="table">
@@ -23,11 +23,11 @@
                 <td>数据库对应字段</td>
                 <td>类型</td>
                 <td>中文名</td>
+                <td>默认值</td>
+                <td>唯一值设置</td>
                 <td>是否主键</td>
                 <td>是否自增</td>
-                <td>是否空</td>
-                <td>唯一值设置</td>
-                <td>默认值</td>
+                <td>是否允许空</td>
                 <td>操作列</td>
             </thead>
             <tbody>
@@ -43,6 +43,16 @@
                     </td>
                     <td>
                         <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <select name="isUnique" id="unique1" class="form-control selectpicker">
+                            <option value=""></option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
                     </td>
                     <td>
                         <select name="isPrimary" id="primary" class="form-control selectpicker">
@@ -66,16 +76,6 @@
                         </select>
                     </td>
                     <td>
-                        <select name="isUnique" id="unique1" class="form-control selectpicker">
-                            <option value=""></option>
-                            <option value="false">false</option>
-                            <option value="true">true</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control">
-                    </td>
-                    <td>
                         <div>
                             <button type="button" class="btn btn-info" onclick="remove(event)">
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
@@ -89,9 +89,11 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-info" onclick="sendForm()">
-        保存
-    </button>
+    <div>
+        <button type="button" class="btn btn-info toRight" onclick="sendForm()">
+            保存
+        </button>
+    </div>
     <div class="tip">
         <span>注意:</span>
         <ul>
