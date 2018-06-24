@@ -21,5 +21,6 @@ const router = express.Router()
 
 router.get('/findAll', ModuleHandler.findAll)
 router.post('/save', ModuleHandler.save)
+router.post('/generate', ModuleHandler.generateCode)
 
 export default router

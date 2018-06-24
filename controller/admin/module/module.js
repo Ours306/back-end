@@ -1,10 +1,12 @@
 import Module from '../../../model/admin/module'
+import Generate from '../../../plugins/generate'
 
 class ModuleHandler {
   constructor() {
     this.save = this.save.bind(this)
     this.edit = this.edit.bind(this)
     this.findAll = this.findAll.bind(this)
+    this.generateCode = this.generateCode.bind(this)
   }
 
   save(req, res, next) {
@@ -15,6 +17,9 @@ class ModuleHandler {
     res.send({msg: '接口未实现'})
   }
 
+  /**
+   * 采用树的遍历方式得出模块
+   */
   async findAll(req, res, next) {
     try {
       let queue = [];
@@ -38,6 +43,19 @@ class ModuleHandler {
     } catch (err) {
       console.log(err)
       res.send({err})
+    }
+  }
+
+  async generateCode(req, res, next) {
+    try {
+      let entity = { ...req.body };
+
+      Generate.generateModle(entity, entity.path);
+      Generate.generateController(entity.entityName, entity.path);
+      Generate.generateRoute(entity.entityName, entity.path);
+      res.send(entity)
+    } catch (error) {
+      next(error);
     }
   }
 

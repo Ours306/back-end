@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>代码生成</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/js/jquery-editable-select.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap-select-1.12.4/css/bootstrap-select.min.css">
+</head>
+<body>
+    <div class="entityInfo">
+        <div><label>实体名称</label><input type="text" class="form-control" id="entityName"></div>
+        <div><label>中文名称</label><input type="text" class="form-control" id="entity_ch_name"></div>
+        <div><label>生成路径</label><input type="text" class="form-control" id="path"></div>
+    </div>
+    <div class="filedInfo">
+        <table class="filedTable table table-bordered" id="table">
+            <thead>
+                <td>字段名</td>
+                <td>数据库对应字段</td>
+                <td>类型</td>
+                <td>中文名</td>
+                <td>默认值</td>
+                <td>唯一值设置</td>
+                <td>是否主键</td>
+                <td>是否自增</td>
+                <td>是否允许空</td>
+                <td>操作列</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <select name="isUnique" id="unique1" class="form-control selectpicker">
+                            <option value=""></option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="isPrimary" id="primary" class="form-control selectpicker">
+                            <option value=""></option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="isAutoIncrement" class="form-control selectpicker" id="autoIncrement1">
+                            <option value=""></option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="isNull" class="form-control selectpicker" id="setNull1">
+                            <option value=""></option>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" class="btn btn-info" onclick="remove(event)">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="add()">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-info toRight" onclick="sendForm()">
+            保存
+        </button>
+    </div>
+    <div class="tip">
+        <span>注意:</span>
+        <ul>
+            <li>
+                类型限制如下:INTEGER、TEXT('tiny')、TEXT、BIGINT BIGINT(11、STRING、STRING(256)、STRING.BINARY、FLOAT、DOUBLE、DATE、BOOLEAN、BLOB......参考
+<a href="http://sequelize.readthedocs.io/en/latest/docs/models-definition/">Sequelize</a>
+            </li>
+            <li>
+                数据库对应字段可以修改，也可以默认为字段名
+            </li>
+            <li>
+                唯一值设置有3中选择：true、false、或其它字段（组合）
+            </li>
+            <li>
+                默认值可根据需要填写
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/js/jquery-editable-select.min.js"></script>
+    <script src="./lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./lib/bootstrap-select-1.12.4/js/bootstrap-select.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

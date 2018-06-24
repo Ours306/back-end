@@ -1,6 +1,8 @@
 import DataTypes from "sequelize";
 import sequelize from "../../config/newDb";
-
+/**
+ * 用户实体
+ */
 const User = sequelize.define('user', {
     id: {
         type: DataTypes.INTEGER,

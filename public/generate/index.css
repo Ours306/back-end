@@ -1,0 +1,36 @@
+body {
+    font-size: 18px;
+}
+
+.entityInfo {
+    display: flex;
+    justify-content: space-around;
+}
+
+.filedInfo {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.filedTable {
+    text-align: center;
+}
+
+.add {
+    float: right;
+    margin-right: 10px;
+}
+
+td {
+    width: 10% !important;
+}
+
+.tip {
+    margin-left: 10px;
+}
+
+.toRight {
+    float: right;
+    margin-right: 10px;
+}

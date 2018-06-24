@@ -1,0 +1,31 @@
+import DataTypes from 'sequelize'
+import sequelize from '../../config/newDb'
+/**
+ * 实体:<%= entity_ch_name %>
+ */
+const <%= entityName %> = sequelize.define('<%= entityName.toLowerCase() %>', {
+    <%_ fields.forEach((item) => { -%>
+        <%= item.name %>: {
+            type: DataTypes.<%= item.type %>,
+            <%_ if(item.isPrimaryKey) { -%>
+            primaryKey: '<%= item.isPrimaryKey %>',
+            <%_ } -%>
+            <%_ if(item.isAutoIncrease) { -%>
+            autoIncrement: '<%= item.isAutoIncrease %>',
+            <%_ } -%>
+            <%_ if(item.isNull) { -%>
+            allowNull: '<%= item.isNull %>',
+            <%_ } -%>
+            <%_ if(item.isUnique) { -%>
+            unique: '<%= item.isUnique %>',
+            <%_ } -%>
+            <%_ if(item.default) { -%>
+            defaultValue: '<%= item.default %>',
+            <%_ } -%>
+            <%_ if(item.ch_name) { -%>
+            comment: '<%= item.ch_name %>'
+            <%_ } -%>
+        },
+    <%_ }) -%>
+})
+module.exports = <%= entityName %>;
