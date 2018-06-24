@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50551
 File Encoding         : 65001
 
-Date: 2018-06-24 19:12:43
+Date: 2018-06-24 21:25:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `module` (
   `updatedAt` datetime DEFAULT NULL,
   `hasChild` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of module
@@ -39,6 +39,9 @@ INSERT INTO `module` VALUES ('3', '动态表单', null, '1', null, null, '1');
 INSERT INTO `module` VALUES ('4', '学生管理', '/student/studentList', '2', null, null, '0');
 INSERT INTO `module` VALUES ('5', '表单管理', '/formDesign/Addform', '3', null, null, '0');
 INSERT INTO `module` VALUES ('6', '教师管理', '/teacher/teacherList', '2', null, null, '0');
+INSERT INTO `module` VALUES ('7', '开发管理', null, '1', null, null, '1');
+INSERT INTO `module` VALUES ('8', '角色管理', '/role/roleList', '7', null, null, '0');
+INSERT INTO `module` VALUES ('9', '用户管理', '/user/userList', '7', null, null, '0');
 
 -- ----------------------------
 -- Table structure for permission
@@ -130,7 +133,7 @@ CREATE TABLE `role` (
   `updatedAt` datetime DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
