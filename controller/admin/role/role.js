@@ -55,7 +55,7 @@ class RoleHandler {
 
   async findAll(req, res, next) {
     try {
-      let roles = await Student.findAll();
+      let roles = await Role.findAll();
 
       res.send(roles);
     } catch (error) {
@@ -66,7 +66,7 @@ class RoleHandler {
   async findById(req, res, next) {
     let id = req.query.id;
     try {
-      let student = await Student.findAll({
+      let roles = await Role.findAll({
         where: {
           id: req.query.id
         }
