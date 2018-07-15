@@ -81,6 +81,31 @@ router.post('/save', UserController.save)
  */
 router.post('/edit', UserController.edit)
 
+
+/**
+ * @swagger
+ * /user/delete:
+ *   post:
+ *      tage:
+ *          - User
+ *      description: 删除用户
+ *      produces:
+ *          - application/json
+ *      parameters:
+ *          - name: user
+ *            description: User Object
+ *            in: body
+ *            required: true
+ *            schema:
+ *              $ref: '#/definitions/User'
+ *      responses:
+ *          200:
+ *              description: 删除成功
+ *              schema:
+ *              $ref: '#/definitions/User'
+ */
+router.post('/delete', UserController.delete)
+
 /**
   * @swagger
   * /user/findAll:
